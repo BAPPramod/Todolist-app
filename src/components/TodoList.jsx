@@ -11,6 +11,10 @@ const TodoList = () => {
     }
   };
 
+  const deleteTodo = (index) => {
+    setTodos(todos.filter((_, i) => i !== index));
+  };
+
   const handleInputChange = (event) => {
     setTodo({ ...todo, [event.target.name]: event.target.value });
   };
@@ -18,7 +22,7 @@ const TodoList = () => {
   return (
     <div>
       <h2>Simple Todolist</h2>
-      <div style={{ textAlign: 'center' }}>
+      <div id='todo-form'>
         <label>Description: </label>
         <input type="text" name="description" value={todo.description} onChange={handleInputChange} />
         <label>Date: </label>
@@ -30,6 +34,7 @@ const TodoList = () => {
           <tr>
             <th>Date</th>
             <th>Description</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -37,6 +42,9 @@ const TodoList = () => {
             <tr key={index}>
               <td>{item.date}</td>
               <td>{item.description}</td>
+              <td>
+                <button onClick={() => deleteTodo(index)}>Delete</button>
+              </td>
             </tr>
           ))}
         </tbody>
